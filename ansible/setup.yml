@@ -1,0 +1,21 @@
+---
+- name: Setup myhost
+  hosts: myhost
+  become: true
+
+  tasks:
+    - name: Install Nginx
+      apt:
+        update_cache: yes
+        name: nginx
+        state: present
+
+    - name: Copy all files from local /home/ubuntu to /var/www/html on remote
+      copy:
+        src: /home/ubuntu/
+        dest: /var/www/html/
+        owner: root
+        group: root
+        mode: '0755'
+        
+

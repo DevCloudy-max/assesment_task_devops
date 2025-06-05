@@ -1,0 +1,9 @@
+---
+- name: My First Playbook
+  hosts: myhost
+
+  tasks:
+  - name: Check connectivity to localhost(myself)
+    ping:
+  - name: Print Success Message
+    debug: msg="Success!!"
