@@ -10,7 +10,7 @@
         name: nginx
         state: present
 
-   - name: Copy all files from /home/ubuntu to /var/www/html on remote
-     shell: cp -r /home/ubuntu/* /var/www/html/
+    - name: Copy all files from /home/ubuntu to /var/www/html on remote
+      shell: cp -r /home/ubuntu/* /var/www/html/
         
 
