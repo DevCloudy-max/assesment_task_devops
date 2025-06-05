@@ -19,5 +19,5 @@ jobs:
           ANSIBLE_HOST_KEY_CHECKING: False
         run: |
           cd ansible
-          ansible-playbook -i inventory.ini deploy.yml
+          ansible-playbook setup.yml deploy.yml
 
