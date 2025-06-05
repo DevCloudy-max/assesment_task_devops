@@ -9,6 +9,11 @@
         update_cache: yes
         name: nginx
         state: present
+    - name: Ensure Nginx is running
+      service:
+        name: nginx
+        state: started
+        enabled: true
 
     - name: Copy all files from /home/ubuntu to /var/www/html on remote
       shell: cp -r /home/ubuntu/* /var/www/html/
@@ -28,4 +33,4 @@
     - name: Start server.js with PM2
       args:
         chdir: /home/ubuntu/backend/  # Change this if your server.js path is different
-      shell: pm2 start server.js 
+      shell: pm2 restart server.js 
