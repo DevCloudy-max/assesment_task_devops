@@ -10,12 +10,7 @@
         name: nginx
         state: present
 
-    - name: Copy all files from local /home/ubuntu to /var/www/html on remote
-      copy:
-        src: /home/ubuntu/
-        dest: /var/www/html/
-        owner: root
-        group: root
-        mode: '0755'
+   - name: Copy all files from /home/ubuntu to /var/www/html on remote
+     shell: cp -r /home/ubuntu/* /var/www/html/
         
 
