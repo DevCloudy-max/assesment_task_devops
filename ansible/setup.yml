@@ -12,5 +12,20 @@
 
     - name: Copy all files from /home/ubuntu to /var/www/html on remote
       shell: cp -r /home/ubuntu/* /var/www/html/
-        
 
+    - name: Install Node.js and npm
+      apt:
+        name:
+          - nodejs
+          - npm
+        state: present
+
+    - name: Install PM2 globally
+      npm:
+        name: pm2
+        global: true
+
+    - name: Start server.js with PM2
+      args:
+        chdir: /home/ubuntu/backend/  # Change this if your server.js path is different
+      shell: pm2 start server.js 
