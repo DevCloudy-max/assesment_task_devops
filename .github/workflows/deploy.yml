@@ -7,17 +7,23 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: Install Ansible
-        run: sudo apt install ansible -y
+    - name: Install Ansible
+      run: sudo apt update && sudo apt install ansible -y
 
-      - name: Deploy to EC2 using Ansible
-        env:
-          ANSIBLE_HOST_KEY_CHECKING: False
-        run: |
-          cd ansible
-          ansible-playbook -i inventory.ini setup.yml 
+    - name: Add SSH key
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/assesment.pem
+        chmod 600 ~/.ssh/assesment.pem
 
+    - name: Run Ansible playbook
+      env:
+        ANSIBLE_HOST_KEY_CHECKING: False
+      run: |
+        cd ansible
+        ansible-playbook -i inventory.ini setup.yml
