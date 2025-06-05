@@ -1,0 +1,23 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Ansible
+        run: sudo apt install ansible -y
+
+      - name: Deploy to EC2 using Ansible
+        env:
+          ANSIBLE_HOST_KEY_CHECKING: False
+        run: |
+          cd ansible
+          ansible-playbook -i inventory.ini deploy.yml
+
